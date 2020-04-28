@@ -1,6 +1,7 @@
 import { Component } from "react";
 import Link from "next/link";
 // import itsImage from "../images/audio.png";
+import Layout from "../components/Layout";
 
 // import "../styles/global.css";
 
@@ -37,33 +38,18 @@ export default class extends Component {
 
   render() {
     return (
-      <div>
-        <div className="its-container ">
-          {/* <img src={itsImage} alt="" /> */}
-          <div className="its-name">
-            <span>Instituto Tecnológico de Saltillo</span>
-            <span>Taller de Investigación 2</span>
-          </div>
-        </div>
+      <Layout>
         <div className="content">
           <div className="title">
             <h1>Comunicación difusa</h1>
-            <img src="" alt="" />
+            <img src="" alt="../images/logo.png" />
             <Link href={`/login`}>
               <button>COMENZAR</button>
             </Link>
-            Hola, Elías
           </div>
         </div>
 
         <style jsx>{`
-          .its-container {
-            display: flex;
-          }
-          .its-name {
-            display: flex;
-            flex-direction: column;
-          }
           button {
             background-color: #5c9dc1;
             color: white;
@@ -81,7 +67,7 @@ export default class extends Component {
             justify-content: center;
           }
         `}</style>
-      </div>
+      </Layout>
     );
   }
 }
