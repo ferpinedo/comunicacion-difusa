@@ -7,3 +7,8 @@
 body {
   font-family: Roboto;
 }
+
+button {
+  background-color: #5c9dc1;
+  color: white;
+}

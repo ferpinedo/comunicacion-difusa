@@ -1,73 +1,18 @@
-import { Component } from "react";
 import Link from "next/link";
-// import itsImage from "../images/audio.png";
 import Layout from "../components/Layout";
 
-// import "../styles/global.css";
+const SplashScreen = () => (
+  <Layout>
+    <div className="flex w-full h-full justify-center items-center">
+      <div className="flex flex-col justify-center space-y-4 mt-20">
+        <h1>Comunicación difusa</h1>
+        <img src="/images/logo.png" />
+        <Link href={`/login`}>
+          <button>COMENZAR</button>
+        </Link>
+      </div>
+    </div>
+  </Layout>
+);
 
-export default class extends Component {
-  state = {
-    input: "",
-    message: null,
-  };
-
-  componentDidMount() {
-    // start listening the channel message
-    global.ipcRenderer.on("message", this.handleMessage);
-  }
-
-  componentWillUnmount() {
-    // stop listening the channel message
-    global.ipcRenderer.removeListener("message", this.handleMessage);
-  }
-
-  handleMessage = (event, message) => {
-    // receive a message from the main process and save it in the local state
-    this.setState({ message });
-  };
-
-  handleChange = (event) => {
-    this.setState({ input: event.target.value });
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    global.ipcRenderer.send("message", this.state.input);
-    this.setState({ message: null });
-  };
-
-  render() {
-    return (
-      <Layout>
-        <div className="content">
-          <div className="title">
-            <h1>Comunicación difusa</h1>
-            <img src="/images/logo.png" />
-            <Link href={`/login`}>
-              <button>COMENZAR</button>
-            </Link>
-          </div>
-        </div>
-
-        <style jsx>{`
-          button {
-            background-color: #5c9dc1;
-            color: white;
-          }
-          .content {
-            display: flex;
-            width: 100%;
-            height: 70vh;
-            justify-content: center;
-            align-items: center;
-          }
-          .title {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-          }
-        `}</style>
-      </Layout>
-    );
-  }
-}
+export default SplashScreen;
