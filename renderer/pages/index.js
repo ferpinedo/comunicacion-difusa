@@ -42,7 +42,7 @@ export default class extends Component {
         <div className="content">
           <div className="title">
             <h1>Comunicación difusa</h1>
-            <img src="" alt="../images/logo.png" />
+            <img src="/images/logo.png" />
             <Link href={`/login`}>
               <button>COMENZAR</button>
             </Link>
