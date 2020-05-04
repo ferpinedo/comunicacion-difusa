@@ -66,6 +66,7 @@ export default class extends Component {
             background-color: white;
             margin-bottom: 15px;
             align-items: center;
+            width: 250px;
           }
           button {
             background-color: #5c9dc1;
