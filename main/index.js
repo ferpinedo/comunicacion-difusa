@@ -20,6 +20,8 @@ app.on("ready", async () => {
     },
   });
 
+  mainWindow.setMenuBarVisibility(false);
+
   const url = isDev
     ? "http://localhost:8000"
     : format({
