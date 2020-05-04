@@ -1,38 +1,17 @@
 const Layout = ({ children }) => (
-  <div>
-    <div className="top-bar">
-      <div className="its-container ">
-        {/* <img src={"/its.png"} alt="Logo de ITS" /> */}
-        <div className="its-name">
+  <>
+    <div className="flex p-4 px-8 justify-between">
+      <div className="flex space-x-4">
+        <img src="/images/its.png" alt="" />
+        <div className="flex flex-col">
           <span>Instituto Tecnológico de Saltillo</span>
           <span>Taller de Investigación 2</span>
         </div>
       </div>
-      <div>ÍCONO DE AUDIO</div>
+      <img className="cursor-pointer" src="/images/audio.png" alt="" />
     </div>
     {children}
-    <style global jsx>{`
-      body {
-        background-color: #f1f1f1;
-      }
-      .top-bar {
-        display: flex;
-        padding: 10px;
-        justify-content: space-between;
-      }
-      .its-container {
-        display: flex;
-      }
-      .its-name {
-        display: flex;
-        flex-direction: column;
-      }
-      a {
-        color: inherit; /* blue colors for links too */
-        text-decoration: inherit; /* no underline */
-      }
-    `}</style>
-  </div>
+  </>
 );
 
 export default Layout;
