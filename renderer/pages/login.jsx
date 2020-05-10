@@ -33,7 +33,7 @@ export default class extends Component {
             </p>
           </div>
           {students.map((student, index) => (
-            <Link key={index} href={`/first`}>
+            <Link key={index} href={`/levels`}>
               <a>
                 <div className="student-card">
                   <div
