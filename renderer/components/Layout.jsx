@@ -14,7 +14,7 @@ const Layout = ({ children }) => (
     </div>
     {children}
     <button
-      className="m-5 bg-white text-primary absolute bottom-0"
+      className="m-5 bg-white text-gray-900 absolute bottom-0"
       onClick={() => Router.back()}
     >
       Volver
