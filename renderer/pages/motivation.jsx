@@ -40,7 +40,7 @@ export default class extends Component {
           </div>
           <div style={{ display: "flex" }}>
             {feelings.map((feeling, index) => (
-              <Link key={index} href={`/ambiguity`}>
+              <Link key={index} href={`/categories`}>
                 <a>
                   <div className="">
                     <div

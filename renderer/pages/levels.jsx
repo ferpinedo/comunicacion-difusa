@@ -29,7 +29,7 @@ export default class extends Component {
           <p>Selecciona tu nivel</p>
           <div className="flex space-x-8">
             {levels.map((level, index) => (
-              <Link key={index} href={`categories`}>
+              <Link key={index} href={`ambiguity`}>
                 <a>
                   <div className="shadow-md rounded-lg bg-white w-32 h-48 flex flex-col p-4 justify-center items-center">
                     <span style={{ fontSize: "100px", color: level.color }}>
