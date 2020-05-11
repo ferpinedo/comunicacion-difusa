@@ -1,5 +1,5 @@
 # Comunicación difusa
-### Proyecto de Taller de investigación II | ITS
+### Proyecto de Taller de Investigación II  |  ITS
 Confirmación de que una Aplicación Multimedia Mediante Lógica Difusa Reduzca la Incertidumbre en la Comunicación Oral en Niños Discapacitados.
 
 ## Introducción del proyecto
