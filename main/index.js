@@ -13,7 +13,7 @@ app.on("ready", async () => {
 
   const mainWindow = new BrowserWindow({
     width: 800,
-    height: 640,
+    height: 740,
     webPreferences: {
       nodeIntegration: false,
       preload: join(__dirname, "preload.js"),

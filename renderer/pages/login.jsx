@@ -32,10 +32,13 @@ export default class extends Component {
               Selecciona tu sesión o crea una nueva presionando el botón azul.
             </p>
           </div>
+          <button className="student-card text-center">
+            + Agregar un nuevo alumno
+          </button>
           {students.map((student, index) => (
-            <Link key={index} href={`/first`}>
+            <Link key={index} href={`/motivation`}>
               <a>
-                <div className="student-card">
+                <div className="student-card shadow-sm">
                   <div
                     style={{
                       backgroundColor: "purple",
@@ -69,7 +72,7 @@ export default class extends Component {
             width: 250px;
           }
           button {
-            background-color: #5c9dc1;
+            background-color: #5c9dc1 !important;
             color: white;
           }
           .content {

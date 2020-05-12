@@ -2,30 +2,30 @@ import { Component } from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
 
-const students = [
+const feelings = [
   {
-    name: "Fernando Pinedo",
-    level: "😃",
+    name: "Muy feliz",
+    emoji: "😃",
   },
   {
-    name: "Fernando Pinedo",
-    level: "🙂",
+    name: "Feliz",
+    emoji: "🙂",
   },
   {
-    name: "Fernando Pinedo",
-    level: "🤨",
+    name: "Neutro",
+    emoji: "😐",
   },
   {
-    name: "Kévin Hernandez",
-    level: "😐",
+    name: "Con sueño",
+    emoji: "🥱",
   },
   {
-    name: "Matías Elizonda",
-    level: "🥱",
+    name: "Triste",
+    emoji: "😢",
   },
   {
-    name: "Elías Sánchez",
-    level: "😡",
+    name: "Enojado",
+    emoji: "😡",
   },
 ];
 
@@ -39,8 +39,8 @@ export default class extends Component {
             <p>¿Cómo te sientes el día de hoy?</p>
           </div>
           <div style={{ display: "flex" }}>
-            {students.map((student, index) => (
-              <Link key={index} href={`/first`}>
+            {feelings.map((feeling, index) => (
+              <Link key={index} href={`/categories`}>
                 <a>
                   <div className="">
                     <div
@@ -53,7 +53,7 @@ export default class extends Component {
                         textAlign: "center",
                       }}
                     >
-                      {student.level}
+                      {feeling.emoji}
                     </div>
                   </div>
                 </a>
