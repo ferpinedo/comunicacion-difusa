@@ -14,6 +14,7 @@ app.on("ready", async () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 740,
+    icon: join(__dirname,'../renderer/public/icons/logo.ico'),
     webPreferences: {
       nodeIntegration: false,
       preload: join(__dirname, "preload.js"),
