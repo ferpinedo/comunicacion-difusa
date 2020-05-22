@@ -3,18 +3,19 @@ import Layout from "../components/Layout";
 import Link from "next/link";
 import { useState } from "react";
 
-const variations = [
-  {
-    name: "Votar",
-    imagesPath: "/images/exercises/Votar/",
-  },
-  {
-    name: "Botar",
-    imagesPath: "/images/exercises/Botar/",
-  },
+const words = [
+  ["Aprehender", "Aprender"],
+  ["Asia", "Hacia"],
+  ["Ato", "Hato"],
+  ["Balsa", "Valsa"],
+  ["Botar", "Votar"],
+  ["Baya", "Vaya", "Valla"],
+  ["Sierra1", "Sierra2"],
+  ["Bello"],
+  ["Arrollo", "1"],
 ];
-
 const Ambiguity = () => {
+  const [currentWord, setCurrentWord] = useState(0);
   const [currentVariation, setCurrentVariation] = useState(0);
   const [showTest, setShowTest] = useState(false);
 
@@ -24,38 +25,50 @@ const Ambiguity = () => {
         Ambiguedad > Nivel 1
       </span>
       <div className="w-full h-full flex flex-col justify-center items-center space-y-10">
-        {currentVariation < 2 ? (
+        {currentVariation < words[currentWord].length ? (
           <>
-            <h2>{variations[currentVariation].name}</h2>
+            <h2>{words[currentWord][currentVariation]}</h2>
             <div className="flex space-x-5 w-11/12 justify-center">
               <img
                 className="w-1/3 h-64 object-cover"
-                src={variations[currentVariation].imagesPath + "1.jpg"}
+                src={
+                  "/images/exercises/" +
+                  words[currentWord][currentVariation] +
+                  "/1.jpg"
+                }
                 alt=""
               />
               <img
                 className="w-1/3 h-64 object-cover"
-                src={variations[currentVariation].imagesPath + "2.jpg"}
+                src={
+                  "/images/exercises/" +
+                  words[currentWord][currentVariation] +
+                  "/2.jpg"
+                }
                 alt=""
               />
               <img
                 className="w-1/3 h-64 object-cover"
-                src={variations[currentVariation].imagesPath + "3.jpg"}
+                src={
+                  "/images/exercises/" +
+                  words[currentWord][currentVariation] +
+                  "/3.jpg"
+                }
                 alt=""
               />
             </div>{" "}
           </>
         ) : (
           <div className="flex justify-center space-x-5">
-            {variations.map((variation) => (
+            {words[currentWord].map((variation) => (
               <div
-                key={variation.name}
+                key={variation}
                 className="flex items-center flex-col space-y-2 w-1/2 px-2"
               >
-                <h2>{variation.name}</h2>
+                <h2>{variation}</h2>
                 <img
                   className="w-full h-64 object-cover"
-                  src={variation.imagesPath + "1.jpg"}
+                  src={"/images/exercises/" + variation + "/1.jpg"}
                   alt=""
                 />
               </div>
@@ -63,7 +76,16 @@ const Ambiguity = () => {
           </div>
         )}
 
-        <button onClick={() => setCurrentVariation(currentVariation + 1)}>
+        <button
+          onClick={() => {
+            if (currentVariation < words[currentWord].length) {
+              setCurrentVariation(currentVariation + 1);
+            } else {
+              setCurrentVariation(0);
+              setCurrentWord(currentWord + 1);
+            }
+          }}
+        >
           Siguiente
         </button>
       </div>
