@@ -8,7 +8,6 @@ const Layout = ({ children }) => (
           <span>Taller de Investigación 2</span>
         </div>
       </div>
-      <img className="cursor-pointer" src="/images/audio.png" alt="" />
     </div>
     {children}
   </>
