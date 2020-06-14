@@ -1,6 +1,8 @@
 import { Component } from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
+import BackButton from "../components/BackButton";
+import SpeakButton from "../components/SpeakButton";
 
 const levels = [
   {
@@ -28,7 +30,7 @@ export default class extends Component {
             {levels.map((level, index) => (
               <Link key={index} href={`/levels`}>
                 <a>
-                  <div className="shadow-md rounded-full hover:bg-white w-48 h-48 flex flex-col p-4 justify-center items-center">
+                  <div className="shadow-md rounded-full bg-gray-100 hover:bg-white w-48 h-48 flex flex-col p-4 justify-center items-center">
                     <span style={{ fontSize: "70px" }}>{level.emoji}</span>
                     <span>{level.name}</span>
                   </div>
@@ -36,9 +38,9 @@ export default class extends Component {
               </Link>
             ))}
           </div>
-
-          <p className="mt-8">Calificación actual: 80/100</p>
         </div>
+        <BackButton route="/motivation" />
+        <SpeakButton text="Seleccion la categoría en la que deseas jugar hoy." />
 
         <style jsx>{``}</style>
       </Layout>

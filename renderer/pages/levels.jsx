@@ -1,6 +1,8 @@
 import { Component } from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
+import BackButton from "../components/BackButton";
+import SpeakButton from "../components/SpeakButton";
 
 const levels = [
   {
@@ -31,7 +33,7 @@ export default class extends Component {
             {levels.map((level, index) => (
               <Link key={index} href={`ambiguity`}>
                 <a>
-                  <div className="shadow-md rounded-lg bg-white w-32 h-48 flex flex-col p-4 justify-center items-center">
+                  <div className="shadow-md rounded-lg bg-gray-100 hover:bg-white w-32 h-48 flex flex-col p-4 justify-center items-center">
                     <span style={{ fontSize: "100px", color: level.color }}>
                       {level.level}
                     </span>
@@ -41,10 +43,9 @@ export default class extends Component {
               </Link>
             ))}
           </div>
-          {/* <Link href={`/categories`}>
-            <button>Categorias</button>
-          </Link> */}
         </div>
+        <BackButton route="/categories" />
+        <SpeakButton text="Ahora elige el nivel." />
 
         <style jsx>{``}</style>
       </Layout>
