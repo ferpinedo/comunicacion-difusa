@@ -4,10 +4,11 @@ import speak from "../utils/textToSpeech";
 
 const SpeakButton = ({ text }) => {
   useEffect(() => {
-    console.log("useEffect started");
-    // setTimeout(() => {
     speak(text);
-    // }, 1000);
+    return () => {
+      // speechSynthesis.pause();
+      speechSynthesis.cancel();
+    };
   }, []);
   return (
     <button
