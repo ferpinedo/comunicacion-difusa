@@ -1,5 +1,3 @@
-import Router from "next/router";
-
 const Layout = ({ children }) => (
   <>
     <div className="flex p-4 px-8 justify-between">
@@ -13,12 +11,6 @@ const Layout = ({ children }) => (
       <img className="cursor-pointer" src="/images/audio.png" alt="" />
     </div>
     {children}
-    <button
-      className="m-5 bg-white text-gray-900 absolute bottom-0"
-      onClick={() => Router.back()}
-    >
-      Volver
-    </button>
   </>
 );
 
