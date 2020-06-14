@@ -1,22 +1,20 @@
 import SpeakButton from "../components/SpeakButton";
-import { Router } from "next/router";
+import Layout from "../components/Layout";
+import Link from "next/link";
 
-const SplashScreen = () => (
+const WipScreen = ({ backRoute = "/categories" }) => (
   <Layout>
     <div className="flex w-full h-full justify-center items-center">
-      <div className="flex flex-col items-center space-y-8 my-20">
+      <div className="flex flex-col items-center space-y-8 my-1">
         <h1>Trabajo en progreso</h1>
         <img src="/images/logo.png" />
-        <button
-          className="m-5 bg-white text-gray-900 absolute bottom-0"
-          onClick={() => Router.back()}
-        >
-          Volver
-        </button>
-        <SpeakButton text="Trabajo en progreso." />
+        <Link href={backRoute}>
+          <button className="m-5 bg-white text-gray-900 ">Volver</button>
+        </Link>
       </div>
     </div>
+    <SpeakButton text="Trabajo en progreso." />
   </Layout>
 );
 
-export default SplashScreen;
+export default WipScreen;
