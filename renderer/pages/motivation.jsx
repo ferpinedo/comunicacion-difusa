@@ -1,6 +1,8 @@
 import { Component } from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
+import BackButton from "../components/BackButton";
+import SpeakButton from "../components/SpeakButton";
 
 const feelings = [
   {
@@ -42,14 +44,13 @@ export default class extends Component {
             {feelings.map((feeling, index) => (
               <Link key={index} href={`/categories`}>
                 <a>
-                  <div className="">
+                  <div>
                     <div
+                      className="hover:shadow"
                       style={{
                         borderRadius: "999px",
-                        width: "50px",
-                        height: "50px",
                         marginRight: "15px",
-                        fontSize: "30px",
+                        fontSize: "90px",
                         textAlign: "center",
                       }}
                     >
@@ -61,6 +62,8 @@ export default class extends Component {
             ))}
           </div>
         </div>
+        <SpeakButton text="Hola, Fernando. ¿Cómo te sientes el día de hoy? Por favor selecciona una figura que represente tu estado de ánimo." />
+        <BackButton route="/login" />
 
         <style jsx>{`
           .student-card {
