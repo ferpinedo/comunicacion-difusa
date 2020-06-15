@@ -5,54 +5,30 @@ import SpeakButton from "../components/SpeakButton";
 import NextIcon from "../public/icons/next.svg";
 import BackIcon from "../public/icons/back.svg";
 import { observer, inject } from "mobx-react";
-
-const words = {
-  1: [
-    [
-      {
-        name: "Asia",
-        imagesPaths: ["1.jpg"],
-        meaning: "Asia. Asia es uno de los 5 continentes en el mundo.",
-      },
-      {
-        name: "Hacia",
-        imagesPaths: ["1.jpg", "2.jpg", "3.jpg"],
-        meaning: "Hacia. Me dirijo hacia mi casa.",
-      },
-    ],
-    [
-      {
-        name: "Botar",
-        imagesPaths: ["1.jpg", "2.jpg", "3.jpg"],
-        meaning: "Botar. El niño bota el balón de basquetbol.",
-      },
-      {
-        name: "Votar",
-        imagesPaths: ["1.jpg", "2.jpg", "3.jpg"],
-        meaning:
-          "Votar. Todos los ciudadanos tienen que votar para elegir a un nuevo presidente.",
-      },
-    ],
-  ],
-  2: [["Sierra1", "Sierra2"], ["Bello"], ["Arrollo", "Arroyo"]],
-  3: [
-    ["Aprehender", "Aprender"],
-    ["Ato", "Hato"],
-    ["Balsa", "Valsa"],
-    ["Baya", "Vaya", "Valla"],
-  ],
-};
+import WORDS from "../resources/words";
+import { shuffleWords, shuffle } from "../utils/shuffle";
 
 const Ambiguity = ({ store }) => {
   const [currentWord, setCurrentWord] = useState(0);
   const [currentVariation, setCurrentVariation] = useState(0);
   const [showTest, setShowTest] = useState(false);
-  const [start, setStartTime] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date());
+  const [words, setWords] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  console.log(JSON.stringify(store.results));
-  console.log(store.results.level);
+  useEffect(async () => {
+    let words = WORDS[store.results.level];
+    await shuffle(words);
+    setWords(words);
+    setIsLoading(false);
+    return null;
+  }, []);
 
-  const thisWords = words[store.results.level][currentWord];
+  if (isLoading) {
+    return <div>Cargando</div>;
+  }
+
+  const thisWords = words[currentWord];
   const thisVariation = thisWords[currentVariation];
 
   const next = () => {
@@ -60,7 +36,14 @@ const Ambiguity = ({ store }) => {
       setCurrentVariation(currentVariation + 1);
     } else {
       setCurrentVariation(0);
-      setCurrentWord(currentWord + 1);
+      const nextWord = currentWord + 1;
+      if (nextWord < words.length) {
+        setCurrentWord(nextWord);
+      } else {
+        setShowTest(true);
+        store.results.exerciseTime = (startTime - new Date().getTime()) / 1000;
+        setStartTime(new Date());
+      }
     }
   };
 
@@ -69,7 +52,7 @@ const Ambiguity = ({ store }) => {
       setCurrentVariation(currentVariation - 1);
     } else {
       if (currentWord > 0) {
-        const prevWord = words[store.results.level][currentWord - 1];
+        const prevWord = words[currentWord - 1];
         setCurrentWord(currentWord - 1);
         setCurrentVariation(prevWord.length - 1);
       }
@@ -77,11 +60,9 @@ const Ambiguity = ({ store }) => {
   };
 
   const isSideBySide = currentVariation >= thisWords.length;
-  return (
-    <Layout>
-      <span className="text-left ml-10 my-5 p-1 rounded-lg bg-gray-300">
-        {"Ambiguedad > Nivel 1"}
-      </span>
+
+  let content = (
+    <>
       <div className="w-full h-full flex flex-col justify-center items-center space-y-10">
         {!isSideBySide ? (
           <>
@@ -137,6 +118,17 @@ const Ambiguity = ({ store }) => {
       {isSideBySide && (
         <SpeakButton text="Presiona las imágenes para escuchar su significado." />
       )}
+    </>
+  );
+  if (showTest) {
+    content = <div>Prueba</div>;
+  }
+  return (
+    <Layout>
+      <span className="text-left ml-10 my-5 p-1 rounded-lg bg-gray-300">
+        {"Ambiguedad > Nivel 1"}
+      </span>
+      {content}
       <BackButton route="/categories" type="menu" />
     </Layout>
   );
