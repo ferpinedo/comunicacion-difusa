@@ -24,13 +24,6 @@ const Ambiguity = ({ store }) => {
   const [currentVariation, setCurrentVariation] = useState(0);
   const [showTest, setShowTest] = useState(false);
 
-  useEffect(() => {
-    store.start();
-    return () => {
-      store.stop();
-    };
-  }, []);
-
   return (
     <Layout>
       <span className="text-left ml-10 my-5 p-1 rounded-lg bg-gray-300">
@@ -102,10 +95,6 @@ const Ambiguity = ({ store }) => {
           <NextIcon width="40px" height="40px" fill="#5C9DC1" />
         </a>
       </div>
-      Hola: {store.light ? "yes" : "no"}
-      <button onClick={() => (store.light = !store.light)}>cambiar</button>
-      <br />
-      {store.lastUpdate}
       <SpeakButton text="Hola, Fernando. ¿Cómo te sientes el día de hoy? Por favor selecciona una figura que represente tu estado de ánimo." />
       <BackButton route="/categories" type="menu" />
     </Layout>

@@ -7,19 +7,17 @@ useStaticRendering(typeof window === "undefined");
 let store;
 
 class Store {
-  @observable lastUpdate = 0;
-  @observable light = false;
   @observable student = {};
   @observable editingStudent = {};
 
-  @action start = () => {
-    this.timer = setInterval(() => {
-      runInAction(() => {
-        this.lastUpdate = Date.now();
-        // this.light = true;
-      });
-    }, 1000);
-  };
+  //   @action start = () => {
+  //     this.timer = setInterval(() => {
+  //       runInAction(() => {
+  //         this.lastUpdate = Date.now();
+  //         // this.light = true;
+  //       });
+  //     }, 1000);
+  //   };
 
   //   @computed get timeString() {
   //     const pad = (n) => (n < 10 ? `0${n}` : n);
@@ -30,14 +28,7 @@ class Store {
   //     return format(new Date(this.lastUpdate));
   //   }
 
-  stop = () => clearInterval(this.timer);
-
-  hydrate = (data) => {
-    if (!data) return;
-
-    this.lastUpdate = data.lastUpdate !== null ? data.lastUpdate : Date.now();
-    this.light = !!data.light;
-  };
+  //   stop = () => clearInterval(this.timer);
 }
 
 function initializeStore(initialData = null) {
@@ -45,11 +36,11 @@ function initializeStore(initialData = null) {
 
   // If your page has Next.js data fetching methods that use a Mobx store, it will
   // get hydrated here, check `pages/ssg.js` and `pages/ssr.js` for more details
-  if (initialData) {
-    _store.hydrate(initialData);
-  }
+  //   if (initialData) {
+  //     _store.hydrate(initialData);
+  //   }
   // For SSG and SSR always create a new store
-  if (typeof window === "undefined") return _store;
+  //   if (typeof window === "undefined") return _store;
   // Create the store once in the client
   if (!store) store = _store;
 
