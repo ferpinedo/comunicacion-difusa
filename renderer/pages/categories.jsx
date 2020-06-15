@@ -1,8 +1,8 @@
-import { Component } from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
 import BackButton from "../components/BackButton";
 import SpeakButton from "../components/SpeakButton";
+import { observer, inject } from "mobx-react";
 
 const levels = [
   {
@@ -22,31 +22,31 @@ const levels = [
   },
 ];
 
-export default class extends Component {
-  render() {
-    return (
-      <Layout>
-        <div className="w-full h-full flex flex-col justify-center items-center">
-          <h1>Categoría</h1>
-          <p>Selecciona una categoría</p>
-          <div className="flex space-x-8">
-            {levels.map((level, index) => (
-              <Link key={index} href={level.route}>
-                <a>
-                  <div className="shadow-md rounded-full bg-gray-100 hover:bg-white w-48 h-48 flex flex-col p-4 justify-center items-center">
-                    <span style={{ fontSize: "70px" }}>{level.emoji}</span>
-                    <span>{level.name}</span>
-                  </div>
-                </a>
-              </Link>
-            ))}
-          </div>
+const Categories = () => {
+  return (
+    <Layout>
+      <div className="w-full h-full flex flex-col justify-center items-center">
+        <h1>Categoría</h1>
+        <p>Selecciona una categoría</p>
+        <div className="flex space-x-8">
+          {levels.map((level, index) => (
+            <Link key={index} href={level.route}>
+              <a>
+                <div className="shadow-md rounded-full bg-gray-100 hover:bg-white w-48 h-48 flex flex-col p-4 justify-center items-center">
+                  <span style={{ fontSize: "70px" }}>{level.emoji}</span>
+                  <span>{level.name}</span>
+                </div>
+              </a>
+            </Link>
+          ))}
         </div>
-        <BackButton route="/motivation" />
-        <SpeakButton text="Seleccion la categoría en la que deseas jugar hoy." />
+      </div>
+      <BackButton route="/motivation" />
+      <SpeakButton text="Seleccion la categoría en la que deseas jugar hoy." />
 
-        <style jsx>{``}</style>
-      </Layout>
-    );
-  }
-}
+      <style jsx>{``}</style>
+    </Layout>
+  );
+};
+
+export default inject("store")(observer(Categories));

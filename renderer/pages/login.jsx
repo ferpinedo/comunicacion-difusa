@@ -33,7 +33,7 @@ const LogIn = ({ store }) => {
         </Link>
         {students.map((student, index) => (
           <Link key={index} href={`/motivation`}>
-            <a>
+            <a onClick={() => (store.student = student)}>
               <div className="student-card shadow-md hover:bg-white bg-gray-100">
                 <div className="bg-gray-300 rounded-full flex justify-center items-center p-3 mr-5">
                   <UserIcon width="32px" height="32px" fill="#B49ACA" />
