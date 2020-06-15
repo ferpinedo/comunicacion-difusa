@@ -22,7 +22,7 @@ const levels = [
   },
 ];
 
-const Categories = () => {
+const Categories = ({ store }) => {
   return (
     <Layout>
       <div className="w-full h-full flex flex-col justify-center items-center">
@@ -31,7 +31,7 @@ const Categories = () => {
         <div className="flex space-x-8">
           {levels.map((level, index) => (
             <Link key={index} href={level.route}>
-              <a>
+              <a onClick={() => (store.results.category = level.name)}>
                 <div className="shadow-md rounded-full bg-gray-100 hover:bg-white w-48 h-48 flex flex-col p-4 justify-center items-center">
                   <span style={{ fontSize: "70px" }}>{level.emoji}</span>
                   <span>{level.name}</span>
