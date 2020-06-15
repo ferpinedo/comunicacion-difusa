@@ -74,7 +74,7 @@ const Ambiguity = ({ store }) => {
               {thisVariation.imagesPaths.map((path) => (
                 <img
                   className="w-1/3 h-64 object-cover"
-                  src={"/images/exercises/" + thisVariation.name + "/" + path}
+                  src={"/images/exercises/" + path}
                   alt=""
                   key={path}
                 />
@@ -93,12 +93,7 @@ const Ambiguity = ({ store }) => {
                 <SpeakButton text={variation.meaning} raw>
                   <img
                     className="w-full h-64 border-dashed border-2 border-gray-700 border-solid rounded-lg p-2 m-2 object-cover"
-                    src={
-                      "/images/exercises/" +
-                      variation.name +
-                      "/" +
-                      variation.imagesPaths[0]
-                    }
+                    src={"/images/exercises/" + variation.imagesPaths[0]}
                     alt=""
                   />
                 </SpeakButton>

@@ -3,24 +3,24 @@ const WORDS = {
     [
       {
         name: "Asia",
-        imagesPaths: ["1.jpg"],
+        imagesPaths: ["Asia/1.jpg"],
         meaning: "Asia. Asia es uno de los 5 continentes en el mundo.",
       },
       {
         name: "Hacia",
-        imagesPaths: ["1.jpg", "2.jpg", "3.jpg"],
+        imagesPaths: ["Hacia/1.jpg", "Hacia/2.jpg", "Hacia/3.jpg"],
         meaning: "Hacia. Me dirijo hacia mi casa.",
       },
     ],
     [
       {
         name: "Botar",
-        imagesPaths: ["1.jpg", "2.jpg", "3.jpg"],
+        imagesPaths: ["Botar/1.jpg", "Botar/2.jpg", "Botar/3.jpg"],
         meaning: "Botar. El niño bota el balón de basquetbol.",
       },
       {
         name: "Votar",
-        imagesPaths: ["1.jpg", "2.jpg", "3.jpg"],
+        imagesPaths: ["Votar/1.jpg", "Votar/2.jpg", "Votar/3.jpg"],
         meaning:
           "Votar. Todos los ciudadanos tienen que votar para elegir a un nuevo presidente.",
       },
