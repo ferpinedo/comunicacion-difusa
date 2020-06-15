@@ -5,9 +5,11 @@ import BackButton from "../components/BackButton";
 import UserIcon from "../public/icons/user.svg";
 import EditIcon from "../public/icons/edit.svg";
 import { observer, inject } from "mobx-react";
+import { useRouter } from "next/router";
 
 const LogIn = ({ store }) => {
   const [students, setStudents] = useState([]);
+  const router = useRouter();
   useEffect(() => {
     let localStudents = JSON.parse(localStorage.getItem("students"));
     if (!localStudents) {
@@ -32,22 +34,24 @@ const LogIn = ({ store }) => {
           </button>
         </Link>
         {students.map((student, index) => (
-          <Link key={index} href={`/motivation`}>
-            <a onClick={() => (store.student = student)}>
+          <Link key={index} href={`/changecontrol`}>
+            <a onClick={() => (store.results = { ...student })}>
               <div className="student-card shadow-md hover:bg-white bg-gray-100">
                 <div className="bg-gray-300 rounded-full flex justify-center items-center p-3 mr-5">
                   <UserIcon width="32px" height="32px" fill="#B49ACA" />
                 </div>
                 <div className="w-full">
                   <div className="mb-2">{student.name}</div>
-                  <Link href={`/newstudent`}>
-                    <a
-                      className="cursor-pointer float-right m-1"
-                      onClick={() => (store.editingStudent = student)}
-                    >
-                      <EditIcon width="15px" height="15px" />
-                    </a>
-                  </Link>
+                  <div
+                    className="cursor-pointer float-right m-1"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      store.editingStudent = student;
+                      router.push("/newstudent");
+                    }}
+                  >
+                    <EditIcon width="15px" height="15px" />
+                  </div>
                 </div>
               </div>
             </a>
