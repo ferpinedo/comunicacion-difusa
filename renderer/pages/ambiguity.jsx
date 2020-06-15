@@ -1,8 +1,9 @@
 import Layout from "../components/Layout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BackButton from "../components/BackButton";
 import SpeakButton from "../components/SpeakButton";
 import NextIcon from "../public/icons/next.svg";
+import { observer, inject } from "mobx-react";
 
 const words = {
   1: [
@@ -18,10 +19,17 @@ const words = {
   ],
 };
 
-const Ambiguity = () => {
+const Ambiguity = ({ store }) => {
   const [currentWord, setCurrentWord] = useState(0);
   const [currentVariation, setCurrentVariation] = useState(0);
   const [showTest, setShowTest] = useState(false);
+
+  useEffect(() => {
+    store.start();
+    return () => {
+      store.stop();
+    };
+  }, []);
 
   return (
     <Layout>
@@ -94,10 +102,14 @@ const Ambiguity = () => {
           <NextIcon width="40px" height="40px" fill="#5C9DC1" />
         </a>
       </div>
+      Hola: {store.light ? "yes" : "no"}
+      <button onClick={() => (store.light = !store.light)}>cambiar</button>
+      <br />
+      {store.lastUpdate}
       <SpeakButton text="Hola, Fernando. ¿Cómo te sientes el día de hoy? Por favor selecciona una figura que represente tu estado de ánimo." />
       <BackButton route="/categories" type="menu" />
     </Layout>
   );
 };
 
-export default Ambiguity;
+export default inject("store")(observer(Ambiguity));
