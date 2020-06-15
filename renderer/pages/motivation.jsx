@@ -43,7 +43,7 @@ const Motivation = ({ store }) => {
         <div style={{ display: "flex" }}>
           {feelings.map((feeling, index) => (
             <Link key={index} href={`/categories`}>
-              <a>
+              <a onClick={() => (store.results.motivation = feeling.name)}>
                 <div>
                   <div
                     className="hover:shadow"
@@ -63,7 +63,7 @@ const Motivation = ({ store }) => {
         </div>
       </div>
       <SpeakButton
-        text={`Hola, ${store.student.name}. ¿Cómo te sientes el día de hoy? Por favor selecciona una figura que represente tu estado de ánimo.`}
+        text={`Hola, ${store.results.name}. ¿Cómo te sientes el día de hoy? Por favor selecciona una figura que represente tu estado de ánimo.`}
       />
       <BackButton route="/login" />
 
