@@ -10,6 +10,7 @@ class Store {
   @observable lastUpdate = 0;
   @observable light = false;
   @observable student = {};
+  @observable editingStudent = {};
 
   @action start = () => {
     this.timer = setInterval(() => {

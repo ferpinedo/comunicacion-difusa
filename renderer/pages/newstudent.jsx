@@ -2,12 +2,15 @@ import Layout from "../components/Layout";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import BackButton from "../components/BackButton";
+import { inject, observer } from "mobx-react";
 
-const NewStudent = ({ student = {} }) => {
-  const isEditing = student.name;
-  const [name, setName] = useState(student.name || "");
-  const [birthdate, setBirthdate] = useState(student.birthdate || "");
-  const [details, setDetails] = useState(student.details || "");
+const NewStudent = ({ store }) => {
+  const isEditing = store.editingStudent.name;
+  const [name, setName] = useState(store.editingStudent.name || "");
+  const [birthdate, setBirthdate] = useState(
+    store.editingStudent.birthdate || ""
+  );
+  const [details, setDetails] = useState(store.editingStudent.details || "");
   const router = useRouter();
 
   const onSave = (e) => {
@@ -16,13 +19,36 @@ const NewStudent = ({ student = {} }) => {
     if (!students) {
       students = [];
     }
-    console.log(JSON.stringify(students));
+
+    if (isEditing) {
+      console.log("is editing");
+      students = students.filter(function (obj) {
+        return obj.name !== name && obj.birthdate !== birthdate;
+      });
+      console.log(students);
+    }
+
     students.push({
       name,
       birthdate,
       details,
     });
+    console.log(students);
     localStorage.setItem("students", JSON.stringify(students));
+    store.editingStudent = {};
+    router.push("/login");
+  };
+
+  const onDelete = () => {
+    let students = JSON.parse(localStorage.getItem("students"));
+    if (!students) {
+      students = [];
+    }
+    const newStudents = students.filter(function (obj) {
+      return obj.name !== name && obj.birthdate !== birthdate;
+    });
+    localStorage.setItem("students", JSON.stringify(newStudents));
+    store.editingStudent = {};
     router.push("/login");
   };
 
@@ -63,7 +89,7 @@ const NewStudent = ({ student = {} }) => {
           />
           <div className="buttons flex justify-center space-x-4 my-4">
             {isEditing && (
-              <button type="button" className="bg-red-500">
+              <button type="button" className="bg-red-500" onClick={onDelete}>
                 Eliminar
               </button>
             )}
@@ -107,4 +133,4 @@ const NewStudent = ({ student = {} }) => {
   );
 };
 
-export default NewStudent;
+export default inject("store")(observer(NewStudent));

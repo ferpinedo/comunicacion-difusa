@@ -2,8 +2,11 @@ import { Component, useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
 import BackButton from "../components/BackButton";
+import UserIcon from "../public/icons/user.svg";
+import EditIcon from "../public/icons/edit.svg";
+import { observer, inject } from "mobx-react";
 
-const LogIn = () => {
+const LogIn = ({ store }) => {
   const [students, setStudents] = useState([]);
   useEffect(() => {
     let localStudents = JSON.parse(localStorage.getItem("students"));
@@ -32,18 +35,19 @@ const LogIn = () => {
           <Link key={index} href={`/motivation`}>
             <a>
               <div className="student-card shadow-md hover:bg-white bg-gray-100">
-                <div
-                  style={{
-                    backgroundColor: "purple",
-                    borderRadius: "999px",
-                    width: "50px",
-                    height: "50px",
-                    marginRight: "10px",
-                  }}
-                ></div>
-                <div>
-                  <span>{student.name}</span>
-                  <br />
+                <div className="bg-gray-300 rounded-full flex justify-center items-center p-3 mr-5">
+                  <UserIcon width="32px" height="32px" fill="#B49ACA" />
+                </div>
+                <div className="w-full">
+                  <div className="mb-2">{student.name}</div>
+                  <Link href={`/newstudent`}>
+                    <a
+                      className="cursor-pointer float-right m-1"
+                      onClick={() => (store.editingStudent = student)}
+                    >
+                      <EditIcon width="15px" height="15px" />
+                    </a>
+                  </Link>
                 </div>
               </div>
             </a>
@@ -86,4 +90,4 @@ const LogIn = () => {
     </Layout>
   );
 };
-export default LogIn;
+export default inject("store")(observer(LogIn));
