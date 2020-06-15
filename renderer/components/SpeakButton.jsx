@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useEffect } from "react";
 import speak from "../utils/textToSpeech";
 import AudioIcon from "../public/icons/audio.svg";

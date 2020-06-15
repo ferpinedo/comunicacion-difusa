@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import BackButton from "../components/BackButton";
 import SpeakButton from "../components/SpeakButton";
 import NextIcon from "../public/icons/next.svg";
+import BackIcon from "../public/icons/back.svg";
 import { observer, inject } from "mobx-react";
 
 const words = {
@@ -49,6 +50,10 @@ const Ambiguity = ({ store }) => {
   const [start, setStartTime] = useState(new Date());
 
   console.log(JSON.stringify(store.results));
+  console.log(store.results.level);
+
+  const thisWords = words[store.results.level][currentWord];
+  const thisVariation = thisWords[currentVariation];
 
   const next = () => {
     if (currentVariation < thisWords.length) {
@@ -64,15 +69,12 @@ const Ambiguity = ({ store }) => {
       setCurrentVariation(currentVariation - 1);
     } else {
       if (currentWord > 0) {
-        const prevWord = words[store.results.level + ""][currentWord - 1];
-        setCurrentWord(prevWord);
-        setCurrentVariation(prevWord[prevWord.length - 1]);
+        const prevWord = words[store.results.level][currentWord - 1];
+        setCurrentWord(currentWord - 1);
+        setCurrentVariation(prevWord.length - 1);
       }
     }
   };
-
-  const thisWords = words[store.results.level + ""][currentWord];
-  const thisVariation = thisWords[currentVariation];
 
   const isSideBySide = currentVariation >= thisWords.length;
   return (
@@ -106,7 +108,7 @@ const Ambiguity = ({ store }) => {
                 <h2>{variation.name}</h2>
                 <SpeakButton text={variation.meaning} raw>
                   <img
-                    className="w-full h-64 border-dashed border-gray-700 border-solid rounded-lg p-5 object-cover"
+                    className="w-full h-64 border-dashed border-2 border-gray-700 border-solid rounded-lg p-2 m-2 object-cover"
                     src={
                       "/images/exercises/" +
                       variation.name +
@@ -122,7 +124,7 @@ const Ambiguity = ({ store }) => {
         )}
 
         <div className="flex space-x-5">
-          {currentVariation === 0 && currentWord === 0 && (
+          {!(currentVariation === 0 && currentWord === 0) && (
             <div onClick={back} className="cursor-pointer">
               <BackIcon width="40px" height="40px" fill="#5C9DC1" />
             </div>

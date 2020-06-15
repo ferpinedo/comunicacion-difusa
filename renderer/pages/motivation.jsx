@@ -43,8 +43,8 @@ const Motivation = ({ store }) => {
         <div style={{ display: "flex" }}>
           {feelings.map((feeling, index) => (
             <Link key={index} href={`/categories`}>
-              <a onClick={() => (store.results.motivation = feeling.name)}>
-                <div>
+              <a>
+                <div onClick={() => (store.results.motivation = feeling.name)}>
                   <div
                     className="hover:shadow"
                     style={{

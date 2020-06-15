@@ -14,7 +14,7 @@ class Store {
     birthdate: "",
     motivation: "",
     category: "",
-    level: "",
+    level: 1,
     completeTime: 0,
     exerciseTime: 0,
     testTime: 0,
