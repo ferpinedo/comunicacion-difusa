@@ -1,5 +1,7 @@
 const WORDS = {
+  // Nivel 1
   1: [
+    // Asia y Hacia
     [
       {
         name: "Asia",
@@ -12,6 +14,7 @@ const WORDS = {
         meaning: "Hacia. Me dirijo hacia mi casa.",
       },
     ],
+    // Botar y Votar
     [
       {
         name: "Botar",
@@ -26,7 +29,9 @@ const WORDS = {
       },
     ],
   ],
+  // Nivel 2
   2: [["Sierra1", "Sierra2"], ["Bello"], ["Arrollo", "Arroyo"]],
+  // Nivel 3
   3: [
     ["Aprehender", "Aprender"],
     ["Ato", "Hato"],
