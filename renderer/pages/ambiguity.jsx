@@ -16,12 +16,15 @@ const Ambiguity = ({ store }) => {
   const [words, setWords] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(async () => {
-    let words = WORDS[store.results.level];
-    await shuffle(words);
-    setWords(words);
-    setIsLoading(false);
-    return null;
+  useEffect(() => {
+    const perform = async () => {
+      let words = WORDS[store.results.level];
+      await shuffle(words);
+      setWords(words);
+      setIsLoading(false);
+      return null;
+    };
+    perform();
   }, []);
 
   if (isLoading) {
