@@ -3,21 +3,29 @@ import { useEffect } from "react";
 import speak from "../utils/textToSpeech";
 import AudioIcon from "../public/icons/audio.svg";
 
-const SpeakButton = ({ text }) => {
+const SpeakButton = ({ text, raw, children }) => {
   useEffect(() => {
-    speak(text);
+    if (!raw) {
+      speak(text);
+    }
     return () => {
-      // speechSynthesis.pause();
       speechSynthesis.cancel();
     };
   }, []);
+
+  const width = raw ? "30px" : "40px";
+  const fill = raw ? "gray" : "#B49ACA";
   return (
-    <a
-      className="m-5 cursor-pointer absolute bottom-0 right-0"
+    <div
+      className={
+        "cursor-pointer flex flex-col items-center justify-center " +
+        (!raw && " m-5 absolute bottom-0 right-0")
+      }
       onClick={() => speak(text)}
     >
-      <AudioIcon width="40px" fill="#B49ACA" />
-    </a>
+      {children}
+      <AudioIcon width={width} fill={fill} />
+    </div>
   );
 };
 
