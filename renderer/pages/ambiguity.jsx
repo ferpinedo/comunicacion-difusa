@@ -1,9 +1,8 @@
-import { Component, useEffect } from "react";
 import Layout from "../components/Layout";
-import Link from "next/link";
 import { useState } from "react";
 import BackButton from "../components/BackButton";
 import SpeakButton from "../components/SpeakButton";
+import NextIcon from "../public/icons/next.svg";
 
 const words = {
   1: [
@@ -81,7 +80,7 @@ const Ambiguity = () => {
           </div>
         )}
 
-        <button
+        <a
           onClick={() => {
             if (currentVariation < words["1"][currentWord].length) {
               setCurrentVariation(currentVariation + 1);
@@ -90,9 +89,10 @@ const Ambiguity = () => {
               setCurrentWord(currentWord + 1);
             }
           }}
+          className="cursor-pointer"
         >
-          Siguiente
-        </button>
+          <NextIcon width="40px" height="40px" fill="#5C9DC1" />
+        </a>
       </div>
       <SpeakButton text="Hola, Fernando. ¿Cómo te sientes el día de hoy? Por favor selecciona una figura que represente tu estado de ánimo." />
       <BackButton route="/categories" type="menu" />
