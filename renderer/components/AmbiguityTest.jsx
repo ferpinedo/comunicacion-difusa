@@ -6,7 +6,7 @@ import SpeakButton from "./SpeakButton";
 import Link from "next/link";
 
 const AmbiguityTest = ({ store, levelWords }) => {
-  const [trys, setTrys] = useState(0);
+  const [trys, setTrys] = useState(1);
   const [isRunning, setIsRunning] = useState(false);
   const [startTime, setStartTime] = useState(null);
   const [words, setWords] = useState([]);
@@ -15,7 +15,6 @@ const AmbiguityTest = ({ store, levelWords }) => {
 
   useEffect(() => {
     let newWords = [];
-    console.log(levelWords);
     levelWords.forEach((wordsGroup) => {
       wordsGroup.forEach((variation) => {
         variation.done = false;
@@ -43,20 +42,19 @@ const AmbiguityTest = ({ store, levelWords }) => {
       if (!results) {
         results = [];
       }
-      results.push({
+      const newResult = {
         ...store.results,
-        testTime: (startTime - new Date().getTime()) / 1000,
+        testTime: (new Date().getTime() - startTime) / 1000,
         correct: words.length,
         trys,
-      });
+      };
+      console.log(newResult);
+      results.push(newResult);
+      localStorage.setItem("results", JSON.stringify(results));
       setAverage((words.length / trys) * 100);
       return;
     }
     setCurrentWord(
-      availableWords[Math.floor(Math.random() * availableWords.length)]
-    );
-    console.log("new current word");
-    console.log(
       availableWords[Math.floor(Math.random() * availableWords.length)]
     );
   };
@@ -98,7 +96,6 @@ const AmbiguityTest = ({ store, levelWords }) => {
     );
   }
 
-  console.log(currentWord.meaning);
   return (
     <div className="grid grid-cols-5">
       {words.map((word) => (

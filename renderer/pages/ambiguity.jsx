@@ -45,7 +45,7 @@ const Ambiguity = ({ store }) => {
         setCurrentWord(nextWord);
       } else {
         setShowTest(true);
-        store.results.exerciseTime = (startTime - new Date().getTime()) / 1000;
+        store.results.exerciseTime = (new Date().getTime() - startTime) / 1000;
         setStartTime(new Date());
       }
     }
@@ -87,7 +87,7 @@ const Ambiguity = ({ store }) => {
           <div className="flex justify-center space-x-5">
             {thisWords.map((variation) => (
               <div
-                key={variation.name}
+                key={variation.imagesPaths[0]}
                 className="flex items-center flex-col space-y-2 w-1/2 px-2"
               >
                 <h2>{variation.name}</h2>
