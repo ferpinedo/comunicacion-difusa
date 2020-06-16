@@ -84,7 +84,7 @@ const WORDS = {
     [
       {
         name: "Asia",
-        imagesPaths: ["Valla/1.jpg","Valla/2.jpg","Valla/3.jpg"],
+        imagesPaths: ["Asia/1.jpg","Asia/2.jpg","Asia/3.jpg"],
         meaning: "Asia. Asia es uno de los 5 continentes en el mundo.",
       },
       {
