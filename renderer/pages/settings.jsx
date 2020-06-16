@@ -10,14 +10,32 @@ const Settings = ({ store }) => {
   const [pitch, setPitch] = useState(1);
   const [rate, setRate] = useState(1);
 
-  useEffect(() => {
+  const voicesUpdate = () => {
     let newVoices = speechSynthesis.getVoices();
-    newVoices = newVoices.filter((voice) => voice.lang.includes("es"));
+    newVoices = newVoices.filter((voice) => voice.lang.includes("es-MX"));
+    if (newVoices.length === 0) {
+      newVoices = newVoices.filter((voice) => voice.lang.includes("es"));
+    }
     console.log(newVoices);
     setVoices(newVoices);
+  };
+
+  useEffect(() => {
+    voicesUpdate();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = voicesUpdate;
+    }
+
+    if (localStorage.getItem("voice")) {
+      setVoice(localStorage.getItem("voice"));
+      setVolume(localStorage.getItem("volume"));
+      setPitch(localStorage.getItem("pitch"));
+      setRate(localStorage.getItem("rate"));
+    }
+    // onTestAndSave();
   }, []);
 
-  const onTest = () => {
+  const onTestAndSave = () => {
     const message = new SpeechSynthesisUtterance(
       "Esta es una prueba de audio de la aplicación llamada Comunicación difusa."
     );
@@ -25,12 +43,16 @@ const Settings = ({ store }) => {
     message.volume = volume;
     message.pitch = pitch;
     message.rate = rate;
+    localStorage.setItem("voice", voice);
+    localStorage.setItem("volume", volume);
+    localStorage.setItem("pitch", pitch);
+    localStorage.setItem("rate", rate);
     speechSynthesis.speak(message);
   };
 
   console.log(voice);
   const fieldClass =
-    "flex space-x-2 mb-2 mx-4 items-center w-40 justify-between";
+    "flex space-x-2 mb-4 mx-4 items-center w-40 justify-between";
 
   return (
     <Layout>
@@ -39,22 +61,22 @@ const Settings = ({ store }) => {
         <div className="flex space-x-8 px-8">
           <div className="w-1/2">
             <h3>Configuración</h3>
+            <div className={fieldClass}>
+              <label htmlFor="voice">Voz</label>
+              <select
+                name="voice"
+                id="voice"
+                value={voice}
+                onChange={(e) => setVoice(e.target.value)}
+              >
+                {voices.map((voice) => (
+                  <option key={voice.name} value={voices.indexOf(voice)}>
+                    {voice.name} / {voice.lang}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="flex flex-wrap">
-              <div className={fieldClass}>
-                <label htmlFor="voice">Voz</label>
-                <select
-                  name="voice"
-                  id="voice"
-                  value={voice}
-                  onChange={(e) => setVoice(e.target.value)}
-                >
-                  {voices.map((voice) => (
-                    <option key={voice.name} value={voices.indexOf(voice)}>
-                      {voice.name} / {voice.lang}
-                    </option>
-                  ))}
-                </select>
-              </div>
               <div className={fieldClass}>
                 <label htmlFor="volume">Volumen</label>
                 <input
@@ -97,7 +119,7 @@ const Settings = ({ store }) => {
                 />
               </div>
             </div>
-            <button onClick={onTest}>Probar audio</button>
+            <button onClick={onTestAndSave}>Probar y guardar</button>
 
             <hr />
             <h3>Exportar resultados</h3>
