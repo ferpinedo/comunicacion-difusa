@@ -15,11 +15,7 @@ class Store {
     motivation: "",
     category: "",
     level: 1,
-    completeTime: 0,
     exerciseTime: 0,
-    testTime: 0,
-    correct: 0,
-    quantity: 0,
   };
 }
 
