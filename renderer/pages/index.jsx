@@ -13,7 +13,7 @@ const SplashScreen = () => {
       <div className="flex w-full h-full justify-center items-center">
         <div className="flex flex-col items-center space-y-8 my-20">
           <h1>Comunicación difusa</h1>
-          <img src="/images/logo.png" />
+          <img src="images/logo.png" />
           <Link href={isFirstTime ? `/settings` : `/login`}>
             <button>COMENZAR</button>
           </Link>

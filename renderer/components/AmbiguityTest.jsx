@@ -104,7 +104,7 @@ const AmbiguityTest = ({ store, levelWords }) => {
             "w-full h-64 object-cover p-2 cursor-pointer " +
             (word.done && "opacity-0")
           }
-          src={"/images/exercises/" + word.imagesPaths[0]}
+          src={"images/exercises/" + word.imagesPaths[0]}
           alt=""
           key={word.imagesPaths[0]}
           onClick={() => isCorrect(word)}
