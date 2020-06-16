@@ -65,6 +65,7 @@ const NewStudent = ({ store }) => {
             type="text"
             name="name"
             id="name"
+            className="mb-4"
             value={name}
             required
             onChange={(e) => setName(e.target.value)}
@@ -74,6 +75,7 @@ const NewStudent = ({ store }) => {
             type="date"
             name="birthdate"
             id="birthdate"
+            className="mb-4"
             value={birthdate}
             required
             onChange={(e) => setBirthdate(e.target.value)}
@@ -83,6 +85,7 @@ const NewStudent = ({ store }) => {
             type="text"
             name="details"
             id="details"
+            className="mb-4"
             value={details}
             required
             onChange={(e) => setDetails(e.target.value)}
