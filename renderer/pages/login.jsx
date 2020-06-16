@@ -4,6 +4,7 @@ import Link from "next/link";
 import BackButton from "../components/BackButton";
 import UserIcon from "../public/icons/user.svg";
 import EditIcon from "../public/icons/edit.svg";
+import SettingsIcon from "../public/icons/settings.svg";
 import { observer, inject } from "mobx-react";
 import { useRouter } from "next/router";
 
@@ -58,6 +59,11 @@ const LogIn = ({ store }) => {
           </Link>
         ))}
       </div>
+      <Link href="/settings">
+        <a className="absolute right-0 bottom-0 m-5">
+          <SettingsIcon width="40px" height="40px" />
+        </a>
+      </Link>
       <BackButton route="/" />
 
       <style jsx>{`
