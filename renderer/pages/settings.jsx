@@ -106,9 +106,10 @@ const Settings = ({ store }) => {
     exportCSVFile(
       [
         {
-          date: "Fecha",
           name: "Nombre",
           birthdate: "Fecha de nacimiento",
+          details: "Observaciones iniciales",
+          date: "Fecha",
           motivation: "Estado de ánimo",
           category: "Caregoría",
           level: "Nivel",
