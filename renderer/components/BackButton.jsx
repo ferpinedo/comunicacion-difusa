@@ -4,7 +4,7 @@ import MenuIcon from "../public/icons/menu.svg";
 
 const BackButton = ({ type = "back", route }) => (
   <Link href={route}>
-    <a className="m-5 cursor-pointer absolute bottom-0">
+    <a className="p-5 cursor-pointer fixed bottom-0">
       {type === "back" ? (
         <BackIcon width="40px" height="40px" fill="#5C9DC1" />
       ) : (

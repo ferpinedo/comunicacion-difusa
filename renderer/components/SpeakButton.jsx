@@ -38,7 +38,7 @@ const SpeakButton = ({ text, raw, children }) => {
     return () => {
       speechSynthesis.cancel();
     };
-  }, []);
+  }, [text]);
 
   const width = raw ? "30px" : "40px";
   const fill = raw ? "gray" : "#B49ACA";
