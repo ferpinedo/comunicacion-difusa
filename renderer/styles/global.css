@@ -294,6 +294,7 @@ li {
 }
 
 input,
+select,
 textarea {
   display: block;
   font-size: 18px;
@@ -303,16 +304,17 @@ textarea {
   border-radius: 5px;
   padding: 10px;
   min-height: 44px;
-  margin-bottom: 20px;
 }
 
 input::placeholder,
+select::placeholder,
 textarea::placeholder {
   color: inherit;
   filter: opacity(40%);
 }
 
 input:focus,
+select:focus,
 textarea:focus {
   outline: none;
   border-color: black;
