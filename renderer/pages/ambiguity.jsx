@@ -7,6 +7,7 @@ import BackIcon from "../public/icons/back.svg";
 import { observer, inject } from "mobx-react";
 import WORDS from "../resources/words";
 import { shuffleWords, shuffle } from "../utils/shuffle";
+import AmbiguityTest from "../components/AmbiguityTest";
 
 const Ambiguity = ({ store }) => {
   const [currentWord, setCurrentWord] = useState(0);
@@ -119,7 +120,7 @@ const Ambiguity = ({ store }) => {
     </>
   );
   if (showTest) {
-    content = <div>Prueba</div>;
+    content = <AmbiguityTest levelWords={words} />;
   }
   return (
     <Layout>
