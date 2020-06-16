@@ -1,11 +1,34 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import speak from "../utils/textToSpeech";
 import AudioIcon from "../public/icons/audio.svg";
 
 const SpeakButton = ({ text, raw, children }) => {
+  // const [voices, setVoices] = useState([]);
+  const [message, setMessage] = useState(null);
+
   useEffect(() => {
+    let voices;
+    const voicesUpdate = () => {
+      let newVoices = speechSynthesis.getVoices();
+      newVoices = newVoices.filter((voice) => voice.lang.includes("es-MX"));
+      if (newVoices.length === 0) {
+        newVoices = newVoices.filter((voice) => voice.lang.includes("es"));
+      }
+      voices = newVoices;
+    };
+    voicesUpdate();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = voicesUpdate;
+    }
+    const newMessage = new SpeechSynthesisUtterance(text);
+    newMessage.voice = voices[localStorage.getItem("voice")];
+    newMessage.volume = localStorage.getItem("volume");
+    newMessage.pitch = localStorage.getItem("pitch");
+    newMessage.rate = localStorage.getItem("rate");
+    setMessage(newMessage);
+
     if (!raw) {
-      speak(text);
+      speechSynthesis.speak(newMessage);
     }
     return () => {
       speechSynthesis.cancel();
@@ -20,7 +43,7 @@ const SpeakButton = ({ text, raw, children }) => {
         "cursor-pointer flex flex-col items-center justify-center " +
         (!raw && " m-5 absolute bottom-0 right-0")
       }
-      onClick={() => speak(text)}
+      onClick={() => speechSynthesis.speak(message)}
     >
       {children}
       <AudioIcon width={width} fill={fill} />
