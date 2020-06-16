@@ -16,6 +16,9 @@ class Store {
     category: "",
     level: 1,
     exerciseTime: 0,
+    testTime: 0,
+    trys: 0,
+    correct: 0,
   };
 }
 
