@@ -26,6 +26,7 @@ const SpeakButton = ({ text, raw, children }) => {
       speechSynthesis.onvoiceschanged = voicesUpdate;
     }
     const newMessage = new SpeechSynthesisUtterance(text);
+    newMessage.default = false;
     newMessage.voice = voices[localStorage.getItem("voice")];
     newMessage.volume = localStorage.getItem("volume");
     newMessage.pitch = localStorage.getItem("pitch");
@@ -48,7 +49,10 @@ const SpeakButton = ({ text, raw, children }) => {
         "cursor-pointer flex flex-col items-center justify-center " +
         (!raw && " p-5 fixed bottom-0 right-0")
       }
-      onClick={() => speechSynthesis.speak(message)}
+      onClick={() => {
+        speechSynthesis.cancel();
+        speechSynthesis.speak(message);
+      }}
     >
       {children}
       <AudioIcon width={width} fill={fill} />
