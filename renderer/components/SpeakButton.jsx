@@ -9,10 +9,15 @@ const SpeakButton = ({ text, raw, children }) => {
   useEffect(() => {
     let voices;
     const voicesUpdate = () => {
-      let newVoices = speechSynthesis.getVoices();
-      newVoices = newVoices.filter((voice) => voice.lang.includes("es-MX"));
+      const gottenVoices = speechSynthesis.getVoices();
+      let newVoices = gottenVoices.filter((voice) =>
+        voice.lang.includes("es-MX")
+      );
       if (newVoices.length === 0) {
-        newVoices = newVoices.filter((voice) => voice.lang.includes("es"));
+        newVoices = gottenVoices.filter((voice) => voice.lang.includes("es"));
+        if (newVoices.length === 0) {
+          newVoices = gottenVoices;
+        }
       }
       voices = newVoices;
     };
@@ -41,7 +46,7 @@ const SpeakButton = ({ text, raw, children }) => {
     <div
       className={
         "cursor-pointer flex flex-col items-center justify-center " +
-        (!raw && " m-5 absolute bottom-0 right-0")
+        (!raw && " p-5 fixed bottom-0 right-0")
       }
       onClick={() => speechSynthesis.speak(message)}
     >

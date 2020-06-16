@@ -11,12 +11,16 @@ const Settings = ({ store }) => {
   const [rate, setRate] = useState(1);
 
   const voicesUpdate = () => {
-    let newVoices = speechSynthesis.getVoices();
-    newVoices = newVoices.filter((voice) => voice.lang.includes("es-MX"));
+    const gottenVoices = speechSynthesis.getVoices();
+    let newVoices = gottenVoices.filter((voice) =>
+      voice.lang.includes("es-MX")
+    );
     if (newVoices.length === 0) {
-      newVoices = newVoices.filter((voice) => voice.lang.includes("es"));
+      newVoices = gottenVoices.filter((voice) => voice.lang.includes("es"));
+      if (newVoices.length === 0) {
+        newVoices = gottenVoices;
+      }
     }
-    console.log(newVoices);
     setVoices(newVoices);
   };
 

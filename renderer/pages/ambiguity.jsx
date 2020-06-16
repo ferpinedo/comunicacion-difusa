@@ -124,7 +124,7 @@ const Ambiguity = ({ store }) => {
   return (
     <Layout>
       <span className="text-left ml-10 my-5 p-1 rounded-lg bg-gray-300">
-        {"Ambiguedad > Nivel 1"}
+        {"Ambiguedad > Nivel " + store.results.level}
       </span>
       {content}
       <BackButton route="/categories" type="menu" />
